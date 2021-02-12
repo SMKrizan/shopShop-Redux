@@ -1,12 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { pluralize } from "../../utils/helpers"
-import { useStoreContext } from '../../utils/GlobalState';
+// 'react-redux' enables interaction between React components and Redux store by reading state and dispatching actions
+import { useDispatch, useSelector } from 'react-redux';
 import { idbPromise } from "../../utils/helpers";
 import { ADD_TO_CART, UPDATE_CART_QUANTITY } from '../../utils/actions';
 
 function ProductItem(item) {
-  const [state, dispatch] = useStoreContext();
+  // uses 'react-redux' methods to enable state update via dispatch and display
+  const dispatch = useDispatch();
+  const state = useSelector(state => state);
 
   const { cart } = state;
 

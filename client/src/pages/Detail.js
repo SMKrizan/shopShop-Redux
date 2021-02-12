@@ -3,7 +3,8 @@ import { Link, useParams } from "react-router-dom";
 import { useQuery } from '@apollo/react-hooks';
 import { QUERY_PRODUCTS } from "../utils/queries";
 import spinner from '../assets/spinner.gif'
-import { useStoreContext } from "../utils/GlobalState";
+
+import { useDispatch, useSelector } from 'react-redux';
 import Cart from '../components/Cart';
 import { idbPromise } from "../utils/helpers";
 import {
@@ -14,7 +15,9 @@ import {
 } from '../utils/actions';
 
 function Detail() {
-  const [state, dispatch] = useStoreContext();
+  // uses 'react-redux' methods to enable state update via dispatch and display
+  const dispatch = useDispatch();
+  const state = useSelector(state => state);
 
   const { id } = useParams();
 

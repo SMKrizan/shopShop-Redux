@@ -1,19 +1,23 @@
 import React, { useEffect } from 'react';
 import { useLazyQuery } from '@apollo/react-hooks';
-import { useStoreContext } from '../../utils/GlobalState';
+// 'react-redux' enables interaction between React components and Redux store by reading state and dispatching actions
+import { useDispatch, useSelector } from 'react-redux';
+import { loadStripe } from '@stripe/stripe-js';
+
 import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from "../../utils/actions";
 import CartItem from '../CartItem';
 import Auth from '../../utils/auth';
 import { idbPromise } from "../../utils/helpers";
 import { QUERY_CHECKOUT } from '../../utils/queries';
-import { loadStripe } from '@stripe/stripe-js';
 import './style.css';
 
 const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 
 const Cart = () => {
-  // hook establishes state variable and dispatch fn to update state; here
-  const [state, dispatch] = useStoreContext();
+  // uses 'react-redux' methods to enable state update via dispatch and display
+  const dispatch = useDispatch();
+  const state = useSelector(state => state);
+
   // hook declares variables to contain checkout session ('data') and call assoc. query ('getCheckout')
   const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
 

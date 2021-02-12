@@ -1,12 +1,14 @@
 import React from 'react';
-import { useStoreContext } from '../../utils/GlobalState';
+// 'react-redux' enables interaction between React components and Redux store by reading state and dispatching actions
+import { useDispatch } from 'react-redux';
 import { REMOVE_FROM_CART, UPDATE_CART_QUANTITY } from '../../utils/actions';
 import { idbPromise } from "../../utils/helpers";
 
 // expecting an 'item' as a prop, the properties of which will be used to populate the JSX
 const CartItem = ({ item }) => {
   // cartItem has no need to read 'state'
-  const [, dispatch] = useStoreContext();
+  // uses 'react-redux' methods to enable state update via dispatch and display
+  const dispatch = useDispatch();
 
   const removeFromCart = item => {
     dispatch({

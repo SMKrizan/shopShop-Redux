@@ -10,10 +10,15 @@ import { QUERY_CATEGORIES } from "../../utils/queries";
 import { idbPromise } from '../../utils/helpers';
 
 function CategoryMenu() {
-  // calls custom hook to retrieve current state from global state object and uses dispatch method to update state
-  const [state, dispatch] = useStoreContext();
+  // uses 'react-redux' methods to enable state update via dispatch and display
+  const dispatch = useDispatch();
+  
+  // 'useSelector' hook enables data extraction from Redux store
+  const state = useSelector(state => state);
+  console.log('state: ', state)
   // destructures array from state
   const { categories } = state;
+
   // queries category data
   const { loading, data: categoryData } = useQuery(QUERY_CATEGORIES);
 

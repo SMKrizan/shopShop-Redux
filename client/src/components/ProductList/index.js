@@ -2,14 +2,17 @@ import React, { useEffect } from "react";
 import { useQuery } from '@apollo/react-hooks';
 import ProductItem from "../ProductItem";
 import { QUERY_PRODUCTS } from "../../utils/queries";
-import spinner from "../../assets/spinner.gif"
-import { useStoreContext } from '../../utils/GlobalState';
+import spinner from "../../assets/spinner.gif";
+// 'react-redux' enables interaction between React components and Redux store by reading state and dispatching actions
+import { useDispatch, useSelector } from 'react-redux';
 import { UPDATE_PRODUCTS } from '../../utils/actions';
 import { idbPromise } from "../../utils/helpers";
 
 function ProductList() {
-  // retrieves global state object and dispatch method to update state and display products to page
-  const [state, dispatch] = useStoreContext();
+  // uses 'react-redux' methods to enable state update via dispatch and display
+  const dispatch = useDispatch();
+  const state = useSelector(state => state);
+
   // destructures needed data from state object so it can be used in filterProducts() fn
   const { currentCategory } = state;
 
