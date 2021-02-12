@@ -9,10 +9,20 @@ import {
     UPDATE_CART_QUANTITY,
     CLEAR_CART,
     TOGGLE_CART
-} from '../utils/actions';
+} from './actions';
+
+// 'state': most up-to-date version of global state object
+const initialState = {
+    // 'dispatch': method updates state - specifically looks for an action object passed as an argument
+    products: [],
+    cart: [],
+    cartOpen: false,
+    categories: [],
+    currentCategory: ''
+};
 
 // takes in state and updates using reducer()
-export const reducer = (state, action) => {
+export const reducer = (state = initialState, action) => {
     // action.type is passed to switch statement and compared with possible actions
     switch (action.type) {
         // if passed action.type value = `UPDATE_PRODUCTS`, returns a new state object with updated products array
